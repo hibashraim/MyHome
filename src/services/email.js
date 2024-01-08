@@ -10,7 +10,7 @@ service:'gmail',
 });
 
   const info = await transporter.sendMail({
-    from: `"H-Shop" <${process.env.EMAILSENDER}>`, // sender address
+    from: `"MyHouse" <${process.env.EMAILSENDER}>`, // sender address
     to,
     subject, 
     html, 

@@ -13,9 +13,7 @@ if(user){
 }
 const hashedPassword= await bcrypt.hash(password,parseInt(process.env.SALT_ROUND))
 
-const {secure_url,public_id}=await cloudinary.uploader.upload(req.file.path,{
-    folder:`${process.env.APP_NAME}/users`
-})
+
 const token=jwt.sign({email},process.env.CONFIRMEMAIL)
 const html=
 `
@@ -248,7 +246,7 @@ a[x-apple-data-detectors] {
 
 `
 await   sendEmail(email,"confirm Email",html)
-const createUser=await userModel.create({userName,email,password:hashedPassword,image:{secure_url,public_id}})
+const createUser=await userModel.create({userName,email,password:hashedPassword})
 return res.status(201).json({message:"success",createUser})
 }catch(err){
     return res.json({err:err.stack})
