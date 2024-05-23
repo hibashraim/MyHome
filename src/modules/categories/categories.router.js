@@ -13,7 +13,7 @@ const router=Router()
 router.use('/:id/subcategory',subCatergoryRouter)
 router.get('/',auth(endPoint.getAll),asyncHandler(categoriesController.getCategories))
 router.get('/active',asyncHandler(categoriesController.getActiveCategory))
-router.post('/',validation(validators.createCategory),auth(endPoint.create),fileUpload(fileValidation.image).single('image'), asyncHandler(categoriesController.createCategories))
+router.post("/",auth(endPoint.create),fileUpload(fileValidation.image).single("image"), validation(validators.createCategory),asyncHandler(categoriesController.createCategories))
 router.get('/:id',validation(validators.getSpecificCategory),auth(endPoint.specific),asyncHandler(categoriesController.getspecificCategory))
 router.put('/:id',auth(endPoint.update),fileUpload(fileValidation.image).single('image'), asyncHandler(categoriesController.updateCategory))
 router.delete("/:categoryId", auth(endPoint.delete), asyncHandler(categoriesController.deleteCategory));
