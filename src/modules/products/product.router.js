@@ -7,6 +7,10 @@ import { validation } from "../../middleware/validation.js";
 import * as validators from "./products.validation.js";
 import { asyncHandler } from "../../services/errorHandling.js";
 const router=Router();
+
+router.get("/filter", asyncHandler(productsController.filterProducts));  
+router.get('/deals', asyncHandler(productsController.getDeals));
+
 router.get("/", asyncHandler(productsController.getProducts));
 router.post(
   "/",
@@ -15,8 +19,13 @@ router.post(
     { name: "mainImage", maxCount: 1 },
     { name: "subImages", maxCount: 4 },
   ]),
-  validation(validators.createProduct), asyncHandler(productsController.createProduct)
+  validation(validators.createProduct), asyncHandler(productsController.createProduct),
+
+
 );
+
 router.get("/category/:categoryId", asyncHandler(productsController.getProductWithCategory));
 router.get("/:productId",asyncHandler(productsController.getProduct));
+router.put('/:id',auth(endPoint.update),fileUpload(fileValidation.image).single('image'), asyncHandler(productsController.updateProduct))
+
 export default router;

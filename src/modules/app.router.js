@@ -6,8 +6,10 @@ import productsRouter from './products/product.router.js';
 import couponRoutr from './coupon/coupon.router.js'
 import cartRouter from './cart/cart.router.js'
 import orderRouter from "./order/order.router.js";
+
 import { globalErrorHandler } from "../services/errorHandling.js";
 import { sendEmail } from '../services/email.js';
+import favoriteListRouter from  "./FavoriteList/favoriteList.router.js"
 
 const initApp=(app,express)=>{
     app.use(express.json());
@@ -27,6 +29,9 @@ app.use('/coupon',couponRoutr);
 
 app.use('/cart',cartRouter);
 app.use("/order", orderRouter);
+app.use("/favorite", favoriteListRouter);
+
+
 app.get("*",(req,res)=>{
     return res.status(500).json({message:"page not found"});
 })

@@ -10,7 +10,7 @@ import { validation } from "../../middleware/validation.js";
 
 const router=Router() 
 
-router.use('/:id/subcategory',subCatergoryRouter)
+router.use('/subcategory',subCatergoryRouter)
 router.get('/',auth(endPoint.getAll),asyncHandler(categoriesController.getCategories))
 router.get('/active',asyncHandler(categoriesController.getActiveCategory))
 router.post("/",auth(endPoint.create),fileUpload(fileValidation.image).single("image"), validation(validators.createCategory),asyncHandler(categoriesController.createCategories))

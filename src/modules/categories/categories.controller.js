@@ -5,6 +5,8 @@ import categoryModel from '../../../DB/model/category.model.js'
 import { pagination } from "../../services/pagination.js";
 import productModel from "../../../DB/model/product.model.js";
 import subcategoryModel from "../../../DB/model/subcategory.model.js";
+import { sendEmail } from "../../services/email.js";
+import { createNotification } from "../notification/notification.js";
 
 export const getCategories = async (req, res) => {
 
@@ -27,6 +29,14 @@ export const createCategories= async(req,res)=>{
         folder: `${process.env.APP_NAME}/category`
     });
 const cat=await categoryModel.create({name,slug:slugify(name),image:{secure_url,public_id},createdBy:req.user._id,updateBy:req.user._id})
+
+   // إرسال إشعار بنجاح إنشاء الفئة
+   const title = "New Category Created";
+   const content = `A new category "${name}" has been created.`;
+   const userId = req.user._id; 
+
+   await createNotification({ title, content, userId });
+
 return res.status(201).json({message:"success",cat})
 }
 // slug: مشان يحط - بدل الفراغ بين الكلمات
@@ -94,3 +104,5 @@ export const getActiveCategory = async (req, res) => {
     await subcategoryModel.deleteMany({ categoryId });
     return res.status(200).json({ message: "success" });
   };
+
+

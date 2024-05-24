@@ -23,7 +23,7 @@ price:{
     type:Number,
     required:true,
 },
-dicount:{
+discount:{
 type:Number,
 default:0,
 },
@@ -58,8 +58,8 @@ sizes:[{
 }],
 categoryId:{ type:Types.ObjectId, ref:'Category', required:true},
 subcategoryId:{ type:Types.ObjectId, ref:'subCategory', required:true},
-createdBy:{ type:Types.ObjectId,  ref:'User', required:true,},
-updateBy:{type:Types.ObjectId, ref:'User',required:true},
+updateBy: { type: Schema.Types.ObjectId, ref: 'User' },
+createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
 },
 {
     timestamps:true,
