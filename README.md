@@ -8,3 +8,4 @@ My Home is an online furniture store using Node.js and Express.
 - User management (login, register)
 - Order processing
 - Search and filter functionality
+- Notifications
