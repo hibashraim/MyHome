@@ -1,6 +1,6 @@
 # My Home
 
-My Home is an online furniture store providing a robust API using Node.js and Express.
+My Home is an online furniture store using Node.js and Express.
 
 ## Features
 
